@@ -5,7 +5,7 @@ import { Request, Response } from 'express';
 import { AdminServices } from "./admin.services";
 import { BlogModel } from "../blog/blog.model";
 
-const blogUser =async (req: Request, res: Response)=>{
+const blockUser =async (req: Request, res: Response)=>{
     const { userId } = req.params;
 //   console.log(userId);
     const existingUser = await UserModel.findById(userId);
@@ -14,19 +14,21 @@ const blogUser =async (req: Request, res: Response)=>{
          res.status(httpStatus.NOT_FOUND).json({
             success: false,
             message: 'User not found',
-          });
+          }
+        );
+        return
     //   throw new AppError(httpStatus.NOT_FOUND,"User not found")
     }
     
 
-     await AdminServices.blogUser(userId);
+     await AdminServices.blockUser(userId);
 
      res.status(httpStatus.OK).json({
       success: true,
       message: 'User blocked successfully',
       "statusCode": httpStatus.OK,
     });
-  };
+  }
 
 
   const deleteBlogByAdmin =async (req: Request, res: Response)=>{
@@ -39,6 +41,7 @@ const blogUser =async (req: Request, res: Response)=>{
             success: false,
             message: 'Blog not found',
           });
+          return;
     //   throw new AppError(httpStatus.NOT_FOUND,"Blog not found")
     }
 
@@ -54,5 +57,5 @@ const blogUser =async (req: Request, res: Response)=>{
 
 
   export const AdminController ={
-blogUser,deleteBlogByAdmin
+blogUser: blockUser,deleteBlogByAdmin
   }

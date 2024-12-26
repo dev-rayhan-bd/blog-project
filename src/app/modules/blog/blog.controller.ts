@@ -90,6 +90,7 @@ const deleteBlog =async (req: Request, res: Response)=>{
       success: false,
       message: 'Blog Not Found',
     });
+    return;
     // throw new AppError(httpStatus.NOT_FOUND,"Blog not found")
   }
   const{ userId }= req.user
@@ -103,6 +104,7 @@ const deleteBlog =async (req: Request, res: Response)=>{
       success: false,
       message: 'You are not authorized to delete this blog',
     });
+    return;
   }
 
   // const result =

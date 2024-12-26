@@ -2,7 +2,7 @@
 import { BlogModel } from "../blog/blog.model";
 import { UserModel } from "../user/user.model";
 
- const blogUser = async (id: string) => {
+ const blockUser = async (id: string) => {
     const result = await UserModel.findByIdAndUpdate(
       id,
       { isBlocked: true },
@@ -20,6 +20,6 @@ import { UserModel } from "../user/user.model";
     };
 
   export const AdminServices={
-    blogUser,deleteBlog
+   blockUser,deleteBlog
 
   }
